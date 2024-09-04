@@ -21,23 +21,17 @@ print("[#] - Modules importés avec succès")
 # Fonction pour initialiser le webdriver et se connecter au site
 def init_and_connect(usr, pswd, spec_metier): 
     print("[#] - Initialisation du webdriver et connexion au site")
-    # Utilisez le Service pour spécifier le chemin du chromedriver
     options = Options()
-
-    # adding arguments
+    options.add_argument("--headless")
+    options.add_argument("window-size=1400,1500")
     options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument("start-maximized")
+    options.add_argument("enable-automation")
+    options.add_argument("--disable-infobars")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--window-size=1920,1080")
-    
-    # Randomize user-agent to mimic different users
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
-    # Specify the path to the ChromeDriver
-    driver = Service("./chromedriver-mac-x64/chromedriver") 
 
-    print("[#] - Options du webdriver configurées")
-
-    # Initialize the WebDriver
-    driver = webdriver.Chrome(service=driver, options=options)
+    driver = webdriver.Chrome(options=options)
     
     print("[#] - Webdriver initialisé")
 
