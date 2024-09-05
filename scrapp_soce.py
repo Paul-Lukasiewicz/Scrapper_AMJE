@@ -93,6 +93,7 @@ def scrap_links(driver):
             time.sleep(10)  # Attente pour le chargement des éléments
             print("[#] - scrapping links from page " + str(i+1))
             elements = driver.find_elements(By.CSS_SELECTOR, '.sc-dkjaqt.goKSRo.sc-cBYhjr.iKMYhH')
+            print("[#] - Elements trouvés")
             # Extraire les attributs href de ces éléments
             links_page = [element.get_attribute('href') for element in elements]
 
