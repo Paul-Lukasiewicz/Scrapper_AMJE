@@ -21,30 +21,29 @@ print("[#] - Modules importés avec succès")
 # Fonction pour initialiser le webdriver et se connecter au site
 def init_and_connect(usr, pswd, spec_metier): 
     print("[#] - Initialisation du webdriver et connexion au site")
-    with st.spinner('Initialisation du Webdriver...'):
-        options = Options()
-        options.add_argument("--headless")
-        options.add_argument("window-size=1400,1500")
-        options.add_argument("--disable-gpu")
-        options.add_argument("--no-sandbox")
-        options.add_argument("start-maximized")
-        options.add_argument("enable-automation")
-        options.add_argument("--disable-infobars")
-        options.add_argument("--disable-dev-shm-usage")
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("window-size=1400,1500")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument("start-maximized")
+    options.add_argument("enable-automation")
+    options.add_argument("--disable-infobars")
+    options.add_argument("--disable-dev-shm-usage")
 
-        driver = webdriver.Chrome(options=options)
-        """
-        service = Service(r"chromedriver-mac-x64/chromedriver")  
+    driver = webdriver.Chrome(options=options)
+    """
+    service = Service(r"chromedriver-mac-x64/chromedriver")  
 
-        # Initialize the WebDriver
-        driver = webdriver.Chrome(service=service, options=options)
-        """
-        
-        print("[#] - Webdriver initialisé")
+    # Initialize the WebDriver
+    driver = webdriver.Chrome(service=service, options=options)
+    """
+    
+    print("[#] - Webdriver initialisé")
 
-        driver.get("https://www.arts-et-metiers.asso.fr/")
-        print("[#] - Page d'accueil chargée")
-        time.sleep(5)  # Augmentez le temps d'attente
+    driver.get("https://www.arts-et-metiers.asso.fr/")
+    print("[#] - Page d'accueil chargée")
+    time.sleep(5)  # Augmentez le temps d'attente
 
     # Vérifiez si vous êtes sur la bonne page de connexion
     if "login" not in driver.current_url:
@@ -97,7 +96,6 @@ def scrap_links(driver):
         try:
             time.sleep(10)  # Attente pour le chargement des éléments
             print("[#] - scrapping links from page " + str(i+1))
-            st.write("[#] - scrapping links from page " + str(i+1))
             elements = driver.find_elements(By.CSS_SELECTOR, '.sc-dkjaqt.goKSRo.sc-cBYhjr.iKMYhH')
             # Extraire les attributs href de ces éléments
             links_page = [element.get_attribute('href') for element in elements]
@@ -133,7 +131,6 @@ def scrap_data(driver, list_of_links, User_name):
         try:
             driver.get(link)
             print(f"[#] - Scraping du profil {index+1}/{len(list_of_links)} : {link}")
-            st.write(f"[#] - Scraping du profil {index+1}/{len(list_of_links)} : {link}")
             time.sleep(10)  # Attente pour le chargement de la page
             
             info = {
@@ -164,7 +161,7 @@ def scrap_data(driver, list_of_links, User_name):
                              profile_data["Mail_prospect"], profile_data["Number_prospect"], 
                              "", "Soce", "Oui", ""])
                 print(f"[#] - {profile_data['Name_prospect']} ajouté à la base de données. {len(data)} profils sur {len(list_of_links)} scrapés.")
-                st.write(f"[#] - {profile_data['Name_prospect']} ajouté à la base de données. {len(data)} profils sur {len(list_of_links)} scrapés.")
+            
         except Exception as e:
             print(f"[#] - Erreur lors du scraping du profil : {e}")
     
