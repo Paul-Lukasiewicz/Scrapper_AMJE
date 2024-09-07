@@ -32,12 +32,7 @@ def init_and_connect(usr, pswd, spec_metier):
     options.add_argument("--disable-dev-shm-usage")
 
     driver = webdriver.Chrome(options=options)
-    """
-    service = Service(r"chromedriver-mac-x64/chromedriver")  
 
-    # Initialize the WebDriver
-    driver = webdriver.Chrome(service=service, options=options)
-    """
     
     print("[#] - Webdriver initialisé")
 
